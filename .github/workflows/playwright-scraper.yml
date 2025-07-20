@@ -1,0 +1,28 @@
+  # .github/workflows/playwright-scraper.yml
+name: Automated QA with Playwright
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  scrape-and-sum:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: npm install playwright
+
+    - name: Install Playwright browsers
+      run: npx playwright install --with-deps
+
+    - name: Scrape and Sum - 23f3003751@ds.study.iitm.ac.in
+      run: node scraper.js
